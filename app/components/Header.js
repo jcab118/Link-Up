@@ -11,11 +11,11 @@ export default class Header extends Component {
   render() {
     return (
       <div>
-        <header className="header">
-          <nav className="navbar navbar-default clearfix" role="navigation">
-              <p className="text-center" id="header-title">Link Up</p>
-          </nav>
-        </header>
+         <header className="header">
+            <a className="waves-effect waves-light btn red">
+              <Link style={{color:'white', padding: '5px', textDecoration: 'none'}} to="/">Home</Link>
+            </a>
+          </header>
       </div>
     );
   }
