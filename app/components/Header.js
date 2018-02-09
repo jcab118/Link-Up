@@ -12,9 +12,7 @@ export default class Header extends Component {
     return (
       <div>
          <header className="header">
-            <a className="waves-effect waves-light btn red">
-              <Link style={{color:'white', padding: '5px', textDecoration: 'none'}} to="/">Home</Link>
-            </a>
+          <Link className="waves-effect waves-light btn red" style={{color:'white', padding: '5px', textDecoration: 'none'}} to="/">Home</Link>
           </header>
       </div>
     );
