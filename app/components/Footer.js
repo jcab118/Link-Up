@@ -17,9 +17,6 @@ export default class Footer extends Component {
           <a className="waves-effect waves-light btn yellow">
               <Link style={{color:'slategrey', padding: '5px', textDecoration: 'none'}} to="/sign_up">Sign Up</Link>
             </a>
-            <a className="waves-effect waves-light btn blue">
-              <Link style={{color:'white', padding: '5px', textDecoration: 'none'}} to="/log_in">Log In</Link>
-            </a>
             <h6 className="text-center" id="copyrite-tag">&copy; 2018 J. Cabrera</h6>
           </footer>
         </div>
