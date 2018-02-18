@@ -2,8 +2,8 @@ var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
 
-var models = require('./models');
-models.sequelize.sync();
+// var models = require('./models');
+// models.sequelize.sync();
 
 var cookieParser = require('cookie-parser');
 var passport = require('passport');
@@ -23,21 +23,21 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.text());
 app.use(bodyParser.json());
 
-app.use(cookieParser())
-app.use(session({
-	secret: 'lesson',
-	store: new SequelizeStore({
-		db: models.sequelize
- 	}),
- 	resave: true,
- 	saveUninitialized: false
-}));
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(cookieParser())
+// app.use(session({
+// 	secret: 'lesson',
+// 	store: new SequelizeStore({
+// 		db: models.sequelize
+//  	}),
+//  	resave: true,
+//  	saveUninitialized: false
+// }));
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 app.use(express.static('./client/public'));
 
-require('./controllers/passport.js')(passport);
+//require('./controllers/passport.js')(passport);
 require('./controllers/routes.js')(app, passport);
 
 app.listen(PORT);
