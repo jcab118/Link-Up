@@ -8,13 +8,21 @@ export default class Sign_out extends Component {
 
     };
   }
-  render() {
-    return (
-      <div>
-         <header className="header">
-          <Link className="waves-effect waves-light btn green" style={{color:'white', padding: '5px', textDecoration: 'none'}} to="/">Sign Out</Link>
-          </header>
-      </div>
-    );
-  }
+signoutUser(){
+        fetch('/api/logout', {
+            method: 'DELETE',
+            credentials: 'same-origin'
+        }).then((response) => {
+          if(response.status == 204){
+            browserHistory.push('/login');
+          }
+        });
+    }
+    render() {
+      return (
+      <ul className="right">
+        <Link onClick={this.signoutUser.bind(this)}>Logout</Link>
+      </ul>
+      );
+    }
 };
