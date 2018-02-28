@@ -13,10 +13,8 @@ export default class Footer extends Component {
     return(
 
         <div>
-          <footer className="footer">
-          <a className="waves-effect waves-light btn yellow">
-              <Link style={{color:'slategrey', padding: '5px', textDecoration: 'none'}} to="/sign_up">Sign Up</Link>
-            </a>
+          <footer className="text-center" id= "footer">
+              <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/sign_up">Sign Up</Link>
             <h6 className="text-center" id="copyrite-tag">&copy; 2018 J. Cabrera</h6>
           </footer>
         </div>

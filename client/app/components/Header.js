@@ -11,12 +11,10 @@ export default class Header extends Component {
   render() {
     return (
       <div>
-         <header className="header">
-          <Link className="waves-effect waves-light btn red" style={{color:'white', padding: '5px', textDecoration: 'none'}} to="/">Home</Link>
-          <a className="waves-effect waves-light btn blue">
-              <Link style={{color:'white', padding: '5px', textDecoration: 'none'}} to="/log_in">Log In</Link>
-               <Link className="waves-effect waves-light btn green" style={{color:'white', padding: '5px', textDecoration: 'none'}} to="/">Sign Out</Link>
-            </a>
+         <header className="text-center" id="header">
+          <Link style={{color:'red', padding: '5px', textDecoration: 'none'}} to="/">Home</Link>
+              <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/log_in">Log In</Link>
+               <Link style={{color:'orange', padding: '5px', textDecoration: 'none'}} to="/">Sign Out</Link>
           </header>
       </div>
     );

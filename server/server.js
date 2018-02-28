@@ -13,7 +13,7 @@ var SequelizeStore = require('connect-session-sequelize')(session.Store);
 var app = express();
 var routes = require('./controllers/routes.js');
 
-var PORT = process.env.PORT || 8000;
+var PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({ 

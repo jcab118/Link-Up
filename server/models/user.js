@@ -18,22 +18,6 @@ module.exports = function (sequelize, DataTypes) {
 				isEmail: true
 			}
 		},
-		address: {
-			type: DataTypes.STRING,
-			allowNull: false
-		},
-		city: {
-			type: DataTypes.STRING,
-			allowNull: false
-		},
-		state: {
-			type: DataTypes.STRING,
-			allowNull: false
-		},
-		zipCode: {
-			type: DataTypes.STRING,
-			allowNull: false
-		},
 		salt: {
 			type: DataTypes.STRING
 		},

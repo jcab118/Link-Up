@@ -11,7 +11,7 @@ export default class Home extends Component {
       <div>
         <Header/>
         <h1 className="text-center" id="home-header">Link Up</h1>
-        <p className="text-center">Locals getting together to play sports. 
+        <p className="text-center">Locals getting together to play sports, 
         in local locations</p>
         <p className="text-center">Have any of the following happened to you:</p>
         <ul className="text-center">
