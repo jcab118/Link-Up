@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import Log_in from "./components/Log_in";
 import Sign_up from "./components/Sign_up";
 import Profile from "./components/Profile";
+import Google_api from "./components/google_api";
 
 
 export default (
@@ -14,5 +15,6 @@ export default (
         <Route path="/log_in" component={Log_in} />
         <Route path="/sign_up" component={Sign_up} />
         <Route path="/profile" component={Profile} />
+        <Route path="/google_api" component={Google_api} />
     </Switch>
 );

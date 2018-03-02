@@ -14,7 +14,6 @@ export default class Header extends Component {
          <header className="text-center" id="header">
           <Link style={{color:'red', padding: '5px', textDecoration: 'none'}} to="/">Home</Link>
               <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/log_in">Log In</Link>
-               <Link style={{color:'orange', padding: '5px', textDecoration: 'none'}} to="/">Sign Out</Link>
           </header>
       </div>
     );

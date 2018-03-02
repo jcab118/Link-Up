@@ -1,57 +1,30 @@
-
 import React, { Component } from 'react';
 var Link = require("react-router-dom").Link;
 
-import Header from './Sign_out';
+// exporting this component to be used on all my pages
 
 export default class Profile extends Component {
-  	constructor(props) {
-    	super(props);
-    	this.state = {
-    		user:{}
-    }
-  };
-  logoutUser(){
-        fetch('/api/logout', {
-            method: 'DELETE',
-            credentials: 'same-origin'
-        }).then((response) => {
-        	if(response.status == 204){
-        		browserHistory.push('/');
-        	}
-        });
-    }
-	componentWillMount(){
-        fetch('/api/logged-in', {
-			headers: {
-                'content-type': 'application/json',
-                'accept': 'application/json'
-            },
-            credentials: 'same-origin'
-		}).then((response) => response.json())
-        .then((results) => {
-            if(results.message){
-                if(results.message !== "logged-in"){
-                    browserHistory.push("/login")
-                } else {
-                	this.setState({
-                		user: results.user
-                	})
-                }
-            }
-        });
-	}
-  	render() {
-	    return (
-	        <div>
-	       		<nav className="navbar navbar-light bg-faded">
-					<Link className="nav-links" to="/">Home</Link>
-                    <Logout />
-				</nav>
-				<div className="text-center">
-		        	<h1>Welcome to Link-Up {this.state.user.name}</h1>
-		        </div>
-	        </div>
-	    );
-  	}
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+    };
+  }
+  render() {
+    return(
+
+        <div>
+          <footer className="text-center" id= "footer">
+              <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/profile">Profile</Link>
+                   <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/friends">Friends</Link>
+                        <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/notifcations">Notifications</Link>
+                             <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/sign_out">Sign Out</Link>
+            <h6 className="text-center" id="copyrite-tag">&copy; 2018 J. Cabrera</h6>
+          </footer>
+           <form className="well center-block" id = "location_search">
+                 <label>Location</label>
+              <input className="text-center" type="text" ref="location"/><br></br>
+            </form>
+        </div>
+    );
+  }
 };
