@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 var Link = require("react-router-dom").Link;
 
-
 export default class ImageUpload extends Component {
     constructor(...args){
         super(...args)
@@ -84,20 +83,37 @@ export default class ImageUpload extends Component {
         }
         return (
             <div>
-                <div className ="text-center" id="accountForm">
+               <nav className = "text-center" id="navbar navbar-light bg-faded">
+                    <Link style={{color:'blue', padding: '10px', textDecoration: 'none'}} to="/Home">Home</Link>
+                    <Link style={{color:'blue', padding: '10px', textDecoration: 'none'}} to="/Profile">Profile</Link>
+                    <Link style={{color:'blue', padding: '10px', textDecoration: 'none'}} to="/Link_up">Link-Up</Link>
+                    <Link style={{color:'blue', padding: '10px', textDecoration: 'none'}} to="/Friends">Friends</Link>
+                    <Link style={{color:'blue', padding: '10px', textDecoration: 'none'}} to="/Notifications">Notifications</Link>
+                    <Link style={{color:'blue', padding: '10px', textDecoration: 'none'}} to="/Sign_out">Sign Out</Link>
+                    <Link style={{color:'blue', padding: '10px', textDecoration: 'none'}} to="/Settings">Settings</Link>
+                </nav>
+                <div className = "text-center" id= "profile info">
+                <h3>"" Profile</h3>
+                </div>
+                <div id="accountForm">
                     <form onSubmit={this.onSaveImage.bind(this)}>
                         <div id="submitButton">
-                            <h4 className="uploadImageText">Upload Profile Image</h4>
                             <input 
                                 className="fileInput" 
                                 type="file"
                                 onChange={this.handleImageChange.bind(this)}
                             />
                             <div> 
-                                <img src={this.state.imageUrl} style={{width: 150, height: 150}}/>
+                                <img src={this.state.imageUrl} style={{width: 300, height: 300}}/>
                             </div>
                             <div id="submitButton">
                                 <input className="btn btn-default" type="submit" />
+                                <h3>Bio</h3>
+                                <h5>I'm the adventourus/sports type. I love sports and trying new things. 
+                                Love watching and playing sports. I have the type of friends that usually 
+                                agree to do things but then back out times certain times, and I'm left with 
+                                the desire to do what we orginally had planned. So im here when so when I have 
+                                plans and my friends flake I'll still have someone to do those activities with.</h5>
                             </div>
                         </div>
                     </form>
@@ -106,12 +122,15 @@ export default class ImageUpload extends Component {
                     {appendImages()}
                 </div>
                     <footer className="text-center" id= "footer">
-                      <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/Link_up">Link-Up</Link>
-                      <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/friends">Friends</Link>
-                      <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/notifcations">Notifications</Link>
-                      <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/sign_out">Sign Out</Link>
-                      <h6 className="text-center" id="copyrite-tag">&copy; 2018 J. Cabrera</h6>
-                 </footer>
+                        <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Home">Home</Link>
+                        <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Profile">Profile</Link>
+                        <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Link_up">Link-Up</Link>
+                        <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Friends">Friends</Link>
+                        <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Notifications">Notifications</Link>
+                        <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Sign_out">Sign Out</Link>
+                        <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Settings">Settings</Link>
+                        <h6 className="text-center" id="copyrite-tag">&copy; 2018 J. Cabrera</h6>
+                    </footer>
             </div>
 
         );

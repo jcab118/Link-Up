@@ -10,7 +10,6 @@ import Link_up from "./components/Link_up";
 import Friends from "./components/Friends";
 import Sign_out from "./components/Sign_out";
 
-
 export default (
   	<Switch>
     	<Route exact path="/" component={Home} />

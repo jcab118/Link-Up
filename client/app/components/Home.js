@@ -1,21 +1,20 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
-import Header from './Header';
-import Footer from './Footer';
+//import Header from './Header';//
+//import Footer from './Footer';//
 
 
 export default class Home extends Component {
+
   render() {
     return (
       <div>
-        <nav className="navbar navbar-light bg-faded">
-         <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/Link_up">Link-Up</Link>
-          <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/friends">Friends</Link>
-          <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/notifcations">Notifications</Link>
-          <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/sign_out">Sign Out</Link>
+        <nav className = "text-center" id="navbar navbar-light bg-faded">
+         <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/Home">Home</Link>
+          <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/Log_in">Log In</Link>
+          <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/Sign_up">Sign Up</Link>
         </nav>
-        <Header/>
         <h1 className="text-center" id="home-header">Link Up</h1>
         <p className="text-center">Locals getting together to play sports, 
         in local locations</p>
@@ -27,7 +26,8 @@ export default class Home extends Component {
         </ul>
         <p className="text-center">If any of these happened to you Link Up is the app for you.</p>
         <p className="text-center">Sign up now and grow the growing Community</p>
-        <Footer/>
+        <br></br>
+        <h6 className="text-center" id="copyrite-tag">&copy; 2018 J. Cabrera</h6>
       </div>
     )
   }

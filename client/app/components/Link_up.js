@@ -56,6 +56,15 @@ export default class Profile extends Component {
     }
     return(
       <div>
+      <nav className = "text-center" id="navbar navbar-light bg-faded">
+         <Link style={{color:'blue', padding: '10px', textDecoration: 'none'}} to="/Home">Home</Link>
+          <Link style={{color:'blue', padding: '10px', textDecoration: 'none'}} to="/Profile">Profile</Link>
+          <Link style={{color:'blue', padding: '10px', textDecoration: 'none'}} to="/Link_up">Link-Up</Link>
+          <Link style={{color:'blue', padding: '10px', textDecoration: 'none'}} to="/Friends">Friends</Link>
+          <Link style={{color:'blue', padding: '10px', textDecoration: 'none'}} to="/Notifications">Notifications</Link>
+          <Link style={{color:'blue', padding: '10px', textDecoration: 'none'}} to="/Sign_out">Sign Out</Link>
+          <Link style={{color:'blue', padding: '10px', textDecoration: 'none'}} to="/Settings">Settings</Link>
+      </nav>
         <div className="text-center">
           <h3>Where would you like to Link-Up</h3>
         </div>
@@ -73,11 +82,14 @@ export default class Profile extends Component {
         </div>
         {}  
         <footer className="text-center" id= "footer">
-          <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/Link_up">Link-Up</Link>
-          <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/friends">Friends</Link>
-          <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/notifcations">Notifications</Link>
-          <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/sign_out">Sign Out</Link>
-          <h6 className="text-center" id="copyrite-tag">&copy; 2018 J. Cabrera</h6>
+            <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Home">Home</Link>
+            <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Profile">Profile</Link>
+            <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Link_up">Link-Up</Link>
+            <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Friends">Friends</Link>
+            <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Notifications">Notifications</Link>
+            <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Sign_out">Sign Out</Link>
+            <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Settings">Settings</Link>
+            <h6 className="text-center" id="copyrite-tag">&copy; 2018 J. Cabrera</h6>
         </footer>
         <div id="map" style={{height: '500px', width: '500px'}}></div>
       </div>
