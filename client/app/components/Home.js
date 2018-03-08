@@ -9,6 +9,12 @@ export default class Home extends Component {
   render() {
     return (
       <div>
+        <nav className="navbar navbar-light bg-faded">
+         <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/Link_up">Link-Up</Link>
+          <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/friends">Friends</Link>
+          <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/notifcations">Notifications</Link>
+          <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/sign_out">Sign Out</Link>
+        </nav>
         <Header/>
         <h1 className="text-center" id="home-header">Link Up</h1>
         <p className="text-center">Locals getting together to play sports, 

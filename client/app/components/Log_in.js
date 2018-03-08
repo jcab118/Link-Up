@@ -28,7 +28,7 @@ export default class Log_in extends Component {
             if(response.status == 401){
                 alert("Login Failed for Username and/or Password")
             } else {
-                browserHistory.push("/profile")
+                this.props.history.push("/profile")
             }
         });
     }

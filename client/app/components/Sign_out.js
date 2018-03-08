@@ -9,19 +9,19 @@ export default class Sign_out extends Component {
     };
   }
 signoutUser(){
-        fetch('/api/logout', {
+        fetch('/api/sign_out', {
             method: 'DELETE',
             credentials: 'same-origin'
         }).then((response) => {
           if(response.status == 204){
-            browserHistory.push('/login');
+            browserHistory.push('/log_in');
           }
         });
     }
     render() {
       return (
       <ul className="right">
-        <Link onClick={this.signoutUser.bind(this)}>Logout</Link>
+        <Link onClick={this.signoutUser.bind(this)}>Sign Out</Link>
       </ul>
       );
     }
