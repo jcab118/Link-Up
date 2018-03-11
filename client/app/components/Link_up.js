@@ -20,15 +20,16 @@ export default class Profile extends Component {
   searchForm(e){
     e.preventDefault();
 
-    let searchQuery = {
-      searchQuery: this.refs.search.value.split(" ").join("+").toLowerCase()
+    let inputs = {
+      searchQuery: this.refs.search.value.split(" ").join("+").toLowerCase(),
+      address: this.refs.city.value.split(" ").join("+").toLowerCase()
     }
     //console.log(city)
     //let api_key = 'AIzaSyDhd7oR7LFMpzzqaKnWxfKip733aktPkSM'
     //let api_url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=500&type=restaurant&keyword=cruise&key=AIzaSyDhd7oR7LFMpzzqaKnWxfKip733aktPkSM`
     fetch('/api/search-place', {
       method: 'POST',
-      body: JSON.stringify(searchQuery),
+      body: JSON.stringify(inputs),
       headers: {
         'content-type': 'application/json',
         'accept': 'application/json'
@@ -36,7 +37,7 @@ export default class Profile extends Component {
       }).then((response) => response.json())
       .then((results) => {
           this.setState({
-            searchResults: results
+            searchResults: JSON.parse(results).results
           })
       });
   }
@@ -50,6 +51,7 @@ export default class Profile extends Component {
         return this.state.searchResults.map((res) => {
           return(
             <div>
+            <p>Name: {res.name}</p>
               <p>Address: {res.formatted_address}</p>
             </div>
           )
@@ -73,9 +75,9 @@ export default class Profile extends Component {
         <div className="search-input">
           <form id="search-bar" onSubmit={this.searchForm.bind(this)}>
             <label>Search</label><br></br>
-            <textarea ref="search"></textarea>
+            <input type="text" ref="search"/>
             <label>City</label>
-            <textarea ref ="search"></textarea> 
+            <input type="text" ref="city"/> 
             <br></br>
             <input disabled={this.state.submitButtonDisabled} className="search-bar" id="submit-this" type="submit"/>
           </form>

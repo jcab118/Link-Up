@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+
 var Link = require("react-router-dom").Link;
 
 import Sign_out from './Sign_out'
@@ -57,7 +57,8 @@ export default class ImageUpload extends Component {
                 'content-type': 'application/json',
                 'accept': 'application/json'
             }
-        }).then((response) => response.json())
+        })
+        .then((response) => response.json())
         .then((results) => {
             this.setState({
                 images: results
@@ -75,8 +76,8 @@ export default class ImageUpload extends Component {
                             key={index}
                         >
                             <img 
-                                src={linkBackground.jpg} 
-                                style={{height: '150px', width: 'auto'}}
+                                src={image.image_src} 
+                                style={{height: '10px', width: 'auto'}}
                             />
                         </div>
                     )
@@ -95,6 +96,10 @@ export default class ImageUpload extends Component {
                 </nav>
                 <div className = "text-center" id= "profile info">
                 <h3>"" Profile</h3>
+                </div>
+                  <div style={{display: 'inline-flex'}}>
+                    {/*appendImages()*/}
+                    <img src="./images/linkBackground.jpg"/>
                 </div>
                 <div id="accountForm">
                     <form onSubmit={this.onSaveImage.bind(this)}>
@@ -118,9 +123,6 @@ export default class ImageUpload extends Component {
                             </div>
                         </div>
                     </form>
-                </div>
-                <div style={{display: 'inline-flex'}}>
-                    {appendImages()}
                 </div>
                     <footer className="text-center" id= "footer">
                         <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Profile">Profile</Link>

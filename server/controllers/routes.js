@@ -28,15 +28,16 @@ module.exports = (app, passport) => {
 
 
 	app.post('/api/search-place', (req, res) => {
-        var weather_api_key = '275d5dfdea53a2d3e3869f48d154e9ac';
-        var weather_api_url = `http://api.openweathermap.org/data/2.5/weather?appid=${weather_api_key}&units=imperial&q=`;
 		//https:maps.googleapis.com/maps/api/place/textsearch/json?query=${req.body.searchQuery}&location=${response.coord.lon},${response.coord.lon}&radius=500&type=restaurant&keyword=cruise
-	    let google_api_url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${req.body.searchQuery}&location=-33.8670522,151.1957362&radius=500&radius=500&type=restaurant&keyword=cruise&key=${google_api_key}`
-	app.get('/api/search-place')
-	//request weather api, within the response, get the lat and lon, and plug them into the google_api_url
-		request(weather_api_url, (err, results, html) =>{
-				res.json(JSON.parse(results.body).results)
-			})
+	    //let google_api_url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${req.body.searchQuery}&location=-33.8670522,151.1957362&radius=500&radius=500&type=restaurant&keyword=cruise&key=${google_api_key}`
+		var geocoder = NodeGeocoder(options);
+		geocoder.geocode(req.body.address, function(geocoderError, geocoderRes) {
+			let google_api_url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${req.body.searchQuery}&location=${geocoderRes[0].latitude},${geocoderRes[0].longitude}&key=${google_api_key}`
+		  	request(google_api_url, (error, results, html) => {
+		  		console.log(results.body)
+		  		res.json(results.body)
+		  	})
+		});
 	})
 // 		var geocoder = NodeGeocoder(options);
 // // Using callback
@@ -46,19 +47,6 @@ module.exports = (app, passport) => {
 // 		  		console.log(results.body)
 // 		  	})
 // 		});
-
-  //       var weather_api_key = '275d5dfdea53a2d3e3869f48d154e9ac';
-  //       var weather_api_url = `http://api.openweathermap.org/data/2.5/weather?appid=${weather_api_key}&units=imperial&q=springfield`;
-  //   	request(weather_api_url, (err, results, html) =>{
-		// 	console.log(results.body)
-		// })
-		//request weather api, within the response, get the lat and lon, and plug them into the google_api_url
-
-	// app.get('.api/search-place')
-		
-			// request(google_api_url, (err, results, html) => {
-			// 	res.json(JSON.parse(results.body).results)
-			// })
 
 	app.get('/api/sign-up', function(req,res){
 		if(req.user){
@@ -113,6 +101,82 @@ module.exports = (app, passport) => {
 		});
 	});
 
+	app.get('/api/images', (req, res) => {
+	models.Image.findAll({order: [
+            ['id', 'ASC']
+    	]}).then((images) => {
+			res.json(images)
+	})
+})
+
+	app.post('/api/image', (req, res) => {
+		models.Image.create({
+				image_src: req.body.image_src
+		}).then((image) => {
+				models.Image.findAll({order: [
+            ['id', 'ASC']
+    	]}).then((images) => {
+						res.json(images)
+				})
+		}).catch((err) => {
+				res.json({error: err})
+	})
+})
+
+app.post('/api/message', (req,res) => {
+	console.log(req.body)
+	if(req.body.name !== '' && req.body.message !== ''){
+		models.Notifications.create({
+			name: req.body.name,
+			message: req.body.message
+		}).then(function(message){
+			res.json(message);
+		});
+	} else if (req.body.name === '' & req.body.message !== '') {
+		models.Notifications.create({
+			name: "Guest",
+			message: req.body.message
+		}).then(function(message){
+			res.json(message);
+		});	
+	} else if ((req.body.name !== '' && req.body.message === '') || (req.body.name === '' && req.body.message === '')) {
+		res.json("null_message")
+	}
+});
+
+app.get('/api/messages', (req,res) => {
+	models.Notifications.findAll({order: [
+            ['id', 'ASC']
+        ]}).then(function(messages){
+		res.json(messages);
+	});
+});
+
+app.delete('/api/delete-message/:id', (req,res) => {
+	models.Notifications.destroy({where: {id: req.params.id}}).then(() => {
+		models.Notifications.findAll({order: [
+            ['id', 'ASC']
+        ]}).then(function(messages){
+			res.json(messages)
+		})
+	})
+});
+
+app.put('/api/update-message/:id', (req,res) => {
+	console.log(req.body)
+	models.Notifications.findOne({ where: { id: req.params.id}}).then(function(message){
+		message.set('message', req.body.message);
+		message.save();
+	}).then(function(success){
+		models.Notifications.findAll({order: [
+            ['id', 'ASC']
+        ]}).then(function(messages){
+			res.json(messages)
+		});
+	}).catch(function(err){
+		throw err
+	});
+});
 	app.get('*', function(req,res){
 		res.sendFile(path.join(__dirname, './../../client/public/index.html'));
 	});

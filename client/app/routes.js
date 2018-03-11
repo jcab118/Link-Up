@@ -11,6 +11,7 @@ import Friends from "./components/Friends";
 import Sign_out from "./components/Sign_out";
 import Settings from "./components/Settings";
 import Notifications from "./components/Notifications";
+import Forgot_Password from "./components/Forgot_Password"
 
 export default (
   	<Switch>
@@ -22,6 +23,7 @@ export default (
         <Route path="/Friends" component={Friends} />
         <Route path="/Sign_out" component={Sign_out} />
         <Route path="/Settings" component={Settings} />
-         <Route path="/Notifications" component={Notifications} />
+        <Route path="/Notifications" component={Notifications} />
+        <Route path="/Forgot_Password" component={Forgot_Password} />
     </Switch>
 );
