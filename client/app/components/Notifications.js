@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 var Link = require("react-router-dom").Link;
 
-import Sign_out from './Sign_out'
-
-export default class Friends extends Component {
+export default class Notifications extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -15,6 +13,7 @@ export default class Friends extends Component {
     return (
       <div>
          <nav className = "text-center" id="navbar navbar-light bg-faded">
+              <Link style={{color:'blue', padding: '10px', textDecoration: 'none'}} to="/Home">Home</Link>
               <Link style={{color:'blue', padding: '10px', textDecoration: 'none'}} to="/Profile">Profile</Link>
               <Link style={{color:'blue', padding: '10px', textDecoration: 'none'}} to="/Link_up">Link-Up</Link>
               <Link style={{color:'blue', padding: '10px', textDecoration: 'none'}} to="/Friends">Friends</Link>
@@ -23,6 +22,7 @@ export default class Friends extends Component {
               <Link style={{color:'blue', padding: '10px', textDecoration: 'none'}} to="/Settings">Settings</Link>
         </nav>
     		<footer className="text-center" id= "footer">
+            <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Home">Home</Link>
             <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Profile">Profile</Link>
             <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Link_up">Link-Up</Link>
             <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Friends">Friends</Link>
@@ -31,10 +31,7 @@ export default class Friends extends Component {
             <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Settings">Settings</Link>
             <h6 className="text-center" id="copyrite-tag">&copy; 2018 J. Cabrera</h6>
         </footer>
-        <Sign_out/>
       </div>
         );
 	   }
 };
-
-

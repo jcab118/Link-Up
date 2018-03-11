@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 var Link = require("react-router-dom").Link;
 
+
+
 // exporting this component to be used on all my pages
 
 export default class Profile extends Component {
@@ -57,7 +59,6 @@ export default class Profile extends Component {
     return(
       <div>
       <nav className = "text-center" id="navbar navbar-light bg-faded">
-         <Link style={{color:'blue', padding: '10px', textDecoration: 'none'}} to="/Home">Home</Link>
           <Link style={{color:'blue', padding: '10px', textDecoration: 'none'}} to="/Profile">Profile</Link>
           <Link style={{color:'blue', padding: '10px', textDecoration: 'none'}} to="/Link_up">Link-Up</Link>
           <Link style={{color:'blue', padding: '10px', textDecoration: 'none'}} to="/Friends">Friends</Link>
@@ -73,6 +74,8 @@ export default class Profile extends Component {
           <form id="search-bar" onSubmit={this.searchForm.bind(this)}>
             <label>Search</label><br></br>
             <textarea ref="search"></textarea>
+            <label>City</label>
+            <textarea ref ="search"></textarea> 
             <br></br>
             <input disabled={this.state.submitButtonDisabled} className="search-bar" id="submit-this" type="submit"/>
           </form>
@@ -82,7 +85,6 @@ export default class Profile extends Component {
         </div>
         {}  
         <footer className="text-center" id= "footer">
-            <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Home">Home</Link>
             <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Profile">Profile</Link>
             <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Link_up">Link-Up</Link>
             <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Friends">Friends</Link>

@@ -36,6 +36,11 @@ export default class Log_in extends Component {
     render() {
       return (
          <div className="text-center">
+        <nav className = "text-center" id="navbar navbar-light bg-faded">
+          <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/Log_in">Log In</Link>
+          <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/Sign_up">Sign Up</Link>
+          <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/Settings">Settings</Link>
+        </nav>
               <h3>Log In</h3>
               <h4>To Start Linking Up</h4>
           <div className="well center-block" id="sign-in-div">
@@ -46,7 +51,10 @@ export default class Log_in extends Component {
               <input className="text-center" type="password" ref="password"/><br></br>
               <input className="btn btn-danger" type="submit" value="Log In"/>
             </form>
-        </div>
+         </div>
+         <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/Log_in">Log In</Link>
+             <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/Sign_up">Sign Up</Link>
+             <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/Settings">Settings</Link>
           </div>
       );
     }

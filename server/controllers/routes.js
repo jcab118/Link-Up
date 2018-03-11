@@ -11,6 +11,17 @@ var bcrypt = require('bcrypt-nodejs');
 
 var request = require('request');
 
+var NodeGeocoder = require('node-geocoder');
+let google_api_key = 'AIzaSyC3vBLtCsv42_Otz5Lotz2FBKUNoqBLwdA'
+var options = {
+  provider: 'google',
+ 
+  // Optional depending on the providers
+  httpAdapter: 'https', // Default
+  apiKey: google_api_key, // for Mapquest, OpenCage, Google Premier
+  formatter: 'json'         // 'gpx', 'string', ...
+};
+
 // var models = require('../models');
 
 module.exports = (app, passport) => {
@@ -19,17 +30,35 @@ module.exports = (app, passport) => {
 	app.post('/api/search-place', (req, res) => {
         var weather_api_key = '275d5dfdea53a2d3e3869f48d154e9ac';
         var weather_api_url = `http://api.openweathermap.org/data/2.5/weather?appid=${weather_api_key}&units=imperial&q=`;
-		let google_api_key = 'AIzaSyC3vBLtCsv42_Otz5Lotz2FBKUNoqBLwdA'
-		//https://maps.googleapis.com/maps/api/place/textsearch/json?query=${req.body.searchQuery}&location=${response.coord.lon},${response.coord.lon}&radius=500&type=restaurant&keyword=cruise
+		//https:maps.googleapis.com/maps/api/place/textsearch/json?query=${req.body.searchQuery}&location=${response.coord.lon},${response.coord.lon}&radius=500&type=restaurant&keyword=cruise
 	    let google_api_url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${req.body.searchQuery}&location=-33.8670522,151.1957362&radius=500&radius=500&type=restaurant&keyword=cruise&key=${google_api_key}`
-		//request weather api, within the response, get the lat and lon, and plug them into the google_api_url
-
-	app.get('.api/search-place')
-	
-			request(google_api_url, (err, results, html) => {
+	app.get('/api/search-place')
+	//request weather api, within the response, get the lat and lon, and plug them into the google_api_url
+		request(weather_api_url, (err, results, html) =>{
 				res.json(JSON.parse(results.body).results)
 			})
 	})
+// 		var geocoder = NodeGeocoder(options);
+// // Using callback
+// 		geocoder.geocode(req.body.address, function(err, res) {
+// 			let google_api_url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${req.body.searchQuery}&location=${res[0].latitude},${res[0].longitude}&key=${google_api_key}`
+// 		  	request(google_api_url, (error, results, html) => {
+// 		  		console.log(results.body)
+// 		  	})
+// 		});
+
+  //       var weather_api_key = '275d5dfdea53a2d3e3869f48d154e9ac';
+  //       var weather_api_url = `http://api.openweathermap.org/data/2.5/weather?appid=${weather_api_key}&units=imperial&q=springfield`;
+  //   	request(weather_api_url, (err, results, html) =>{
+		// 	console.log(results.body)
+		// })
+		//request weather api, within the response, get the lat and lon, and plug them into the google_api_url
+
+	// app.get('.api/search-place')
+		
+			// request(google_api_url, (err, results, html) => {
+			// 	res.json(JSON.parse(results.body).results)
+			// })
 
 	app.get('/api/sign-up', function(req,res){
 		if(req.user){

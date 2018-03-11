@@ -1,5 +1,5 @@
 import React from "react";
-
+import axios from 'axios';
 import { Switch, Route } from "react-router-dom";
 
 import Home from "./components/Home";
@@ -9,6 +9,8 @@ import Profile from "./components/Profile";
 import Link_up from "./components/Link_up";
 import Friends from "./components/Friends";
 import Sign_out from "./components/Sign_out";
+import Settings from "./components/Settings";
+import Notifications from "./components/Notifications";
 
 export default (
   	<Switch>
@@ -19,6 +21,7 @@ export default (
         <Route path="/Link_up" component={Link_up} />
         <Route path="/Friends" component={Friends} />
         <Route path="/Sign_out" component={Sign_out} />
-
+        <Route path="/Settings" component={Settings} />
+         <Route path="/Notifications" component={Notifications} />
     </Switch>
 );
