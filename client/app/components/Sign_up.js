@@ -41,7 +41,7 @@ class Sign_up extends Component {
            <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/">Home</Link>
            <Link style={{color:'blue', padding: '5px', textDecoration: 'none'}} to="/Log_in">Log In</Link>
         </nav>
-            <h4>Please Sign Up In Order To Begin Using Link-Up</h4>
+            <h4>Register for Link-Up</h4>
         <div className="well center-block" id="Sign_up_div">
           <form id="sign-in-form" onSubmit={this.signUpForm.bind(this)}>
             <label>Name</label><br></br>
