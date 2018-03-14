@@ -8,15 +8,13 @@ export default class Sign_out extends Component {
         credentials: 'same-origin'
     }).then((response) => {
       if(response.status == 204){
-        browserHistory.push('/Log_in');
+        this.props.history.push('/Log_in');
       }
     });
   }
   render() {
     return (
-      <ul className="right">
         <a onClick={this.signoutUser.bind(this)}>Sign Out</a>
-      </ul>
     );
   }
 };
