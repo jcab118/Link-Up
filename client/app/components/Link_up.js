@@ -50,9 +50,10 @@ export default class Profile extends Component {
       if(this.state.searchResults){
         return this.state.searchResults.map((res) => {
           return(
-            <div>
+            <div className="text-center">
             <p>Name: {res.name}</p>
               <p>Address: {res.formatted_address}</p>
+              <br></br>
             </div>
           )
         })

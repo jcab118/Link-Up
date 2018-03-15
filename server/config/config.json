@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "jcab118",
-    "password": null,
+    "password": "",
     "database": "link_up",
     "host": "localhost",
     "dialect": "postgres"

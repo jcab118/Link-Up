@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, browserHistory } from 'react-router';
 
-export default class ForgotPassword extends Component {
+export default class Forgot_Password extends Component {
     constructor(props) {
         super(props);
         this.state = {

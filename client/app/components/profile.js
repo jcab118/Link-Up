@@ -11,7 +11,10 @@ export default class ImageUpload extends Component {
             file: '',
             imageUrl: '',
             savedImage: '',
-            images: []
+            images: [],
+            loggedInUser: undefined,
+            counter: 0,
+            countDone: false
         }
     }
     handleImageChange(e){
@@ -32,9 +35,9 @@ export default class ImageUpload extends Component {
         e.preventDefault();
 
         var creds = {};
-        var profileImage = this.state.imageUrl;
-        creds.image_src = profileImage
-
+        creds.image_src = this.state.imageUrl;
+        creds.user_id = this.state.loggedInUser.user.id;
+        console.log(creds)
         fetch('/api/image', {
             method: 'post',
             body: JSON.stringify(creds),
@@ -64,24 +67,41 @@ export default class ImageUpload extends Component {
                 images: results
             })
         });
+
+        fetch('/api/signed-in', {
+            headers: {
+                'content-type': 'application/json',
+                'accept': 'application/json'
+            },
+            credentials: 'same-origin'
+        })
+        .then((response) => response.json())
+        .then((results) => {
+            this.setState({
+                loggedInUser: results
+            })
+        });
+            var ci = setInterval(() => {
+                if(this.state.counter < 3){
+                    this.setState({
+                        counter: this.state.counter + 1
+                    })
+                } else {
+                    this.setState({
+                        countDone: true
+                    })
+                    clearInterval(ci);
+                }
+            }, 1000)
     }
     render() {
-        console.log(this.state.images)
-        const appendImages = () => {
-            if(this.state.images.length > 0){
-                return this.state.images.map((image, index) => {
-                    return (
-                        <div 
-                            style={{padding: '10px'}}
-                            key={index}
-                        >
-                            <img 
-                                src={image.image_src} 
-                                style={{height: '10px', width: 'auto'}}
-                            />
-                        </div>
-                    )
-                })
+        console.log(this.state);
+        let ifUserHasImage;
+        let imageId;
+        if(this.state.images.length > 0 && this.state.loggedInUser){
+            ifUserHasImage = this.state.images.map((image) => image.UserId).indexOf(this.state.loggedInUser.user.id) > -1;
+            if(ifUserHasImage){
+                imageId = this.state.images.filter((image) => image.UserId === this.state.loggedInUser.user.id)
             }
         }
         return (
@@ -91,51 +111,68 @@ export default class ImageUpload extends Component {
                     <Link style={{color:'blue', padding: '10px', textDecoration: 'none'}} to="/Link_up">Link-Up</Link>
                     <Link style={{color:'blue', padding: '10px', textDecoration: 'none'}} to="/Friends">Friends</Link>
                     <Link style={{color:'blue', padding: '10px', textDecoration: 'none'}} to="/Notifications">Notifications</Link>
-                    <Link style={{color:'blue', padding: '10px', textDecoration: 'none'}} to="/Sign_out">Sign Out</Link>
+                    <Sign_out style={{color:'blue', padding: '10px', textDecoration: 'none'}}/>
                     <Link style={{color:'blue', padding: '10px', textDecoration: 'none'}} to="/Settings">Settings</Link>
                 </nav>
                 <div className = "text-center" id= "profile info">
-                <h3>"" Profile</h3>
+                    <h3>{this.state.loggedInUser ? this.state.loggedInUser.user.name + "'s Profile" : 'Pending'}</h3>
                 </div>
-                  <div style={{display: 'inline-flex'}}>
-                    {/*appendImages()*/}
-                    <img src="./images/linkBackground.jpg"/>
-                </div>
-                <div id="accountForm">
-                    <form onSubmit={this.onSaveImage.bind(this)}>
-                        <div id="submitButton">
-                            <input 
-                                className="fileInput" 
-                                type="file"
-                                onChange={this.handleImageChange.bind(this)}
-                            />
-                            <div> 
-                                <img src={this.state.imageUrl} style={{width: 300, height: 300}}/>
+                {
+                    this.state.counter < 3 ?
+                        <div>
+                            <img src="./images/lg.fidget-spinner.gif" style={{height: '200px', width: 'auto'}}/>
+                        </div> :
+                        <div>
+                            <div style={{display: 'inline-flex'}}>
+                                {
+                                    ifUserHasImage && imageId ?
+                                        <img src={imageId[0].img_src} style={{height: '150px', width: 'auto'}}/> :
+                                        <img src="./images/linkBackground.jpg"/>
+                                }
                             </div>
-                            <div id="submitButton">
-                                <input className="btn btn-default" type="submit" />
-                                <h3>Bio</h3>
-                                <h5>I'm the adventourus/sports type. I love sports and trying new things. 
-                                Love watching and playing sports. I have the type of friends that usually 
-                                agree to do things but then back out times certain times, and I'm left with 
-                                the desire to do what we orginally had planned. So im here when so when I have 
-                                plans and my friends flake I'll still have someone to do those activities with.</h5>
+                            <div id="accountForm">
+                                <form onSubmit={this.onSaveImage.bind(this)}>
+                                    <div id="submitButton">
+                                        {
+                                            ifUserHasImage ?
+                                                <div></div> :
+                                                <div>
+                                                    <input 
+                                                        className="fileInput" 
+                                                        type="file"
+                                                        onChange={this.handleImageChange.bind(this)}
+                                                    />
+                                                    <img src={this.state.imageUrl} style={{width: 300, height: 300}}/>
+                                                    <input className="btn btn-default" type="submit" />
+                                                </div>
+                                        }
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                    </form>
+                }
+                <div id="submitButton">
+                    <h3>Bio</h3>
+                    <h5>I'm the adventourus/sports type. I love sports and trying new things. 
+                    Love watching and playing sports. I have the type of friends that usually 
+                    agree to do things but then back out times certain times, and I'm left with 
+                    the desire to do what we orginally had planned. So im here when so when I have 
+                    plans and my friends flake I'll still have someone to do those activities with.</h5>
                 </div>
-                    <footer className="text-center" id= "footer">
-                        <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Profile">Profile</Link>
-                        <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Link_up">Link-Up</Link>
-                        <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Friends">Friends</Link>
-                        <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Notifications">Notifications</Link>
-                        <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Sign_out">Sign Out</Link>
-                        <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Settings">Settings</Link>
-                        <h6 className="text-center" id="copyrite-tag">&copy; 2018 J. Cabrera</h6>
-                    </footer>
-                <Sign_out/>  
+                <footer className="text-center" id= "footer">
+                    <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Profile">Profile</Link>
+                    <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Link_up">Link-Up</Link>
+                    <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Friends">Friends</Link>
+                    <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Notifications">Notifications</Link>
+                    <Sign_out style={{color:'red', padding: '10px', textDecoration: 'none'}}/>
+                    <Link style={{color:'red', padding: '10px', textDecoration: 'none'}} to="/Settings">Settings</Link>
+                    <h6 className="text-center" id="copyrite-tag">&copy; 2018 J. Cabrera</h6>
+                </footer> 
             </div>
 
         );
     }
 }
+
+
+

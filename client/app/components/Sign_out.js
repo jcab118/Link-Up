@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-var Link = require("react-router-dom").Link;
+import { Link, withRouter } from 'react-router-dom';
 
-export default class Sign_out extends Component {
+class Sign_out extends Component {
   signoutUser(){
     fetch('/api/sign_out', {
         method: 'DELETE',
@@ -14,7 +14,9 @@ export default class Sign_out extends Component {
   }
   render() {
     return (
-        <a onClick={this.signoutUser.bind(this)}>Sign Out</a>
+        <Link to="#" onClick={this.signoutUser.bind(this)}>Sign Out</Link>
     );
   }
 };
+
+export default withRouter(Sign_out);

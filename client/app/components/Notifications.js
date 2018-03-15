@@ -4,18 +4,17 @@ import { Modal } from 'react-bootstrap';
 var Link = require("react-router-dom").Link;
 
 export default class Notifications extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      messages: [],
+    constructor(props) {
+        super(props);
+        this.state = {
+          messages: [],
           open: false,
           messageToUpdate: '',
           idToUpdate: '',
             submitButtonDisabled: false
-      };
-  }
-
-      deleteMessage(id){
+        };
+    }
+    deleteMessage(id){
         fetch(`/api/delete-message/${id}`,{
             method: 'DELETE',
             headers: {
@@ -36,7 +35,6 @@ export default class Notifications extends Component {
         idToUpdate: id
       }) 
     }
-
     updateMessage(){
         this.setState({
             submitButtonDisabled: true
@@ -50,8 +48,7 @@ export default class Notifications extends Component {
             headers: {
                 'content-type': 'application/json',
                 'accept': 'application/json'
-
-               }
+            }
         }).then((response) => response.json())
         .then((results) => {
             this.setState({
@@ -83,9 +80,8 @@ export default class Notifications extends Component {
             });
         });
     }
-
-    componentWillMount(){
-    fetch('/api/messages', {
+  componentWillMount(){
+    fetch('/api/message', {
       headers: {
                 'content-type': 'application/json',
                 'accept': 'application/json'
@@ -93,12 +89,12 @@ export default class Notifications extends Component {
     }).then((response) => response.json())
         .then((results) => {
           this.setState({
-            messages: results
+            message: results
           });
-        });
+      });
   }
     render() {
-      console.log(this.state.messages)
+      //console.log(this.state.messages)
       const { messages } = this.state;
 
       let closeModal = () => this.setState({ open: false })
@@ -131,11 +127,11 @@ export default class Notifications extends Component {
         <br></br>
         <h5 className="text-center">Write on wall to Link-Up</h5>
         <div className="text-center center-block">
-          <form id="notifications-form" onSubmit={this.messageForm.bind(this)}>
+          <form id="guestbook-form" onSubmit={this.messageForm.bind(this)}>
             <label>Name</label><br></br>
-            <input className="text-center" type="text" ref="name"/><br></br>
+            <input type="text" ref="name"/><br></br>
             <label>Message</label><br></br>
-            <textarea className= "text-center"ref="message"></textarea>
+            <textarea ref="message"></textarea>
             <br></br>
             <input disabled={this.state.submitButtonDisabled} className="btn btn-default" id="submit-this" type="submit"/>
           </form>
@@ -149,7 +145,6 @@ export default class Notifications extends Component {
               aria-labelledby="ModalHeader"
             >
               <div id="modal-form-div" className="text-center">
-              
             <form id="update-message-form" onSubmit={this.updateMessage.bind(this)}>
               <label>Message</label><br></br>
               <textarea defaultValue={this.state.messageToUpdate} ref="updated_message"></textarea>
@@ -157,7 +152,6 @@ export default class Notifications extends Component {
               <input disabled={this.state.submitButtonDisabled} className="btn btn-default" id="submit-this" type="submit"/>
             </form>
           </div>
-          <br></br>
             </Modal>
             <br></br>
             <footer className="text-center" id= "footer">
