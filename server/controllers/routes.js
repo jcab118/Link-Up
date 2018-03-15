@@ -132,14 +132,14 @@ module.exports = (app, passport) => {
 
 app.post('/api/message', (req,res) => {
 	if(req.body.name !== '' && req.body.message !== ''){
-		models.guestbook.create({
+		models.Guestbook.create({
 			name: req.body.name,
 			message: req.body.message
 		}).then(function(message){
 			res.json(message);
 		});
 	} else if (req.body.name === '' & req.body.message !== '') {
-		models.guestbook.create({
+		models.Guestbook.create({
 			name: "Guest",
 			message: req.body.message
 		}).then(function(message){
@@ -159,7 +159,7 @@ app.get('/api/messages', (req,res) => {
 });
 
 app.delete('/api/delete-message/:id', (req,res) => {
-	models.guestbook.destroy({where: {id: req.params.id}}).then(() => {
+	models.Guestbook.destroy({where: {id: req.params.id}}).then(() => {
 		models.guestbook.findAll({order: [
             ['id', 'ASC']
         ]}).then(function(messages){
@@ -169,7 +169,7 @@ app.delete('/api/delete-message/:id', (req,res) => {
 });
 
 app.put('/api/update-message/:id', (req,res) => {
-	models.guestbook.findOne({ where: { id: req.params.id}}).then(function(message){
+	models.Guestbook.findOne({ where: { id: req.params.id}}).then(function(message){
 		message.set('message', req.body.message);
 		message.save();
 	}).then(function(success){

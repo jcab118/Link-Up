@@ -90,14 +90,14 @@ export default class Notifications extends Component {
         .then((results) => {
           console.log(results);
           this.setState({
-            message: results
+            messages: results
           });
       });
   }
     render() {
       //console.log(this.state.messages)
       const { messages } = this.state;
-
+      console.log(messages)
       let closeModal = () => this.setState({ open: false })
 
       const appendMessages = () => {
