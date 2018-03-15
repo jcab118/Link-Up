@@ -20,7 +20,7 @@ export default class Home extends Component {
         </nav>
         <div id="home-header">
             <h1 className="text-center">Link Up</h1>
-            <p className="text-center">Locals getting together to play sports, 
+            <p className="text-center">Locals getting together; 
             in local locations</p>
             <p className="text-center">Have any of the following happened to you:</p>
             <ul className="text-center">

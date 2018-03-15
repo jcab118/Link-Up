@@ -1,3 +1,12 @@
 body{
-	background-color: ;
+	background-color: #C0C0C0;
+	font-family: Monospace;
+}
+
+#sign-in-div{
+	background-color: #C0C0C0;
+}
+
+#sign_up_div{
+	background-color: red;
 }
