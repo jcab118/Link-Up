@@ -151,10 +151,10 @@ app.post('/api/message', (req,res) => {
 });
 
 app.get('/api/messages', (req,res) => {
-	models.guestbook.findAll({order: [
+	models.Guestbook.findAll({order: [
             ['id', 'ASC']
         ]}).then(function(messages){
-		res.json(messages);
+			res.json(messages);
 	});
 });
 

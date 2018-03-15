@@ -81,13 +81,14 @@ export default class Notifications extends Component {
         });
     }
   componentWillMount(){
-    fetch('/api/message', {
+    fetch('/api/messages', {
       headers: {
                 'content-type': 'application/json',
                 'accept': 'application/json'
             }
     }).then((response) => response.json())
         .then((results) => {
+          console.log(results);
           this.setState({
             message: results
           });
